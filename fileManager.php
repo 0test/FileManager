@@ -13,8 +13,9 @@ $uid = $modx->getLoginUserID('web');
 
 if(!$uid){return false;}
 
-$tpl = '@FILE: main';
 
+
+//Секция загрузки
 $data['newfile_form'] = $modx->runSnippet('FormLister', array(
 	'formid' => 'frm',
 	'prepareAfterProcess' => array(function($modx, $data, $FormLister, $name){
@@ -79,6 +80,25 @@ $data['newfile_form'] = $modx->runSnippet('FormLister', array(
 	'submitLimit' => 0,
 ));
 
+
+//Секция обзора файлов
+$data['allfiles_list'] = $modx->runSnippet('DocLister', array(
+	'controller' => 'onetable',
+	'idType' => 'documents',
+	'table' => 'userfiles',
+	'display' => 'all',
+	'ignoreEmpty' => 1,
+	'sortBy' => 'id',
+	'sortDir' => 'DESC',
+	'tpl' => '@FILE: fileform_row',
+	'showParent' => 0,
+	'idField' => 'id',
+	'addWhereList' => 'c.owner_id =' . $uid,
+	'ownerTPL' => '@FILE: files_outer',
+));
+
+
+$tpl = '@FILE: main';
 $out = $DLTemplate->parseChunk( $tpl, $data, true );
 
 return $out;

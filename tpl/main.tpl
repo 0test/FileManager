@@ -14,14 +14,7 @@
 				<h4 class="ttvpage-sub-title">Добавленные файлы</h4>
 			</div>
 			<div class="ttv-sub-pages-inner-content">
-				<table class="pcode_table table table-bordered">
-					<tbody><tr>
-						<th>Файл</th>
-						<th>Дата</th>
-					</tr>					
-					
-				</tbody>
-				[+wrap+]
+				[+allfiles_list+]
 				</table>				
 			</div>
 
